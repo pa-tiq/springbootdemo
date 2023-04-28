@@ -7,12 +7,22 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 // depois de digitar Serializable, pressione Ctrl + Shift + O para adicionar o import
 // depois disso irá aparecer um "!" na linha abaixo. Clique nele e selecione 
 // "Add default serial version ID". Isso irá adicionar a variável serialVersionUID.
+@Entity
 public class Category implements Serializable {
 		
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
 	// É melhor usar Long (classe) do que long (tipo primitivo) pq o Long 
 	// pode ser nulo e aceita conceitos de POO (herança, polimorfismo, etc).
@@ -21,6 +31,7 @@ public class Category implements Serializable {
 	private String name;
 	
 	@JsonIgnore
+	@OneToMany(mappedBy = "category")
 	private List<Product> products = new ArrayList<>();
 	
 

@@ -29,7 +29,7 @@ public class CategoryResource {
 
 	@GetMapping(value = "/{id}") // responde em /categories/id
 	public ResponseEntity<Category> findById(@PathVariable Long id) { //@PathVariable serve para reconhecer o id que vc coloca na URL
-		Category cat = categoryRepository.findById(id);
+		Category cat = categoryRepository.findById(id).get();
 		return ResponseEntity.ok().body(cat);
 	}
 	
